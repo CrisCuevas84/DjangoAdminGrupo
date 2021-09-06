@@ -1,0 +1,52 @@
+{% extends 'main_content.html' %}
+{% block content %}
+<h1>Libros</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha Creación</th>
+        <th scope="col">Fecha Actualización</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for libro in lista_libros %}
+        <tr>
+            <th scope="row">{{ libro.id }}</th>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.created_at }}</td>
+            <td>{{ librot.updated_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h1>Publicadores</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Libros</th>
+        <th scope="col">Fecha Creación</th>
+        <th scope="col">Fecha Actualización</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for publicador in lista_publicadores %}
+        <tr>
+            <th scope="row">{{ client.id }}</th>
+            <td>{{ publicador.nombre }}</td>
+            <td> 
+                {% for libro in publicador.libros.all %}
+                    {{ libro.titulo }} - 
+                {% endfor%}
+            </td>
+            <td>{{ publicador.created_at }}</td>
+            <td>{{ publicador.updated_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
