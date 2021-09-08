@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import * # Esta importando todos los modelos con el *
 
 
@@ -51,3 +51,18 @@ def libros_publicadores(request):
         'lista_publicadores': publicadores, 
     }
     return render(request, 'polls/libros_publicadores.html' ,context)
+
+
+def editar(request):
+    publicador = Publicador.objects.get(id=request.POST['id'])
+    context = {
+        "publicador": publicador
+    }
+    return render(request,'polls/edit.html', context)
+
+
+def update(request):
+    publicador = Publicador.objects.get(id=request.POST['id'])
+    publicador.nombre = request.POST['publicador']
+    publicador.save()
+    return redirect('libros_publicadores')

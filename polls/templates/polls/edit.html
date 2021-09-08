@@ -1,0 +1,16 @@
+{% extends 'main_content.html' %}
+{% block content %}
+<h1>Editar</h1>
+    <form class="text-center my-5" method="POST" action="update">
+    {% csrf_token %}
+        <input type="hidden" name="id" value="{{publicador.id}}">
+        <div class="mb-3">
+            <label for="publicador" class="form-label">publicador:</label>
+            <input type="text" class="form-control" id="publicador" value="{{ publicador.nombre }}" name="publicador" placeholder="Ingrese publicador">
+        </div>
+        <div class="mb-3">
+            <a class="btn btn-primary" href="libros_publicadores" role="button">volver</a>
+            <input type="submit" class="btn btn-success" value="Actualizar datos">
+        </div>
+    </form>
+{% endblock %}

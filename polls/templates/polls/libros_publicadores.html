@@ -16,7 +16,7 @@
             <th scope="row">{{ libro.id }}</th>
             <td>{{ libro.titulo }}</td>
             <td>{{ libro.created_at }}</td>
-            <td>{{ librot.updated_at }}</td>
+            <td>{{ libro.updated_at }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -36,7 +36,7 @@
     <tbody>
         {% for publicador in lista_publicadores %}
         <tr>
-            <th scope="row">{{ client.id }}</th>
+            <th scope="row">{{ publicador.id }}</th>
             <td>{{ publicador.nombre }}</td>
             <td> 
                 {% for libro in publicador.libros.all %}
@@ -45,8 +45,16 @@
             </td>
             <td>{{ publicador.created_at }}</td>
             <td>{{ publicador.updated_at }}</td>
+            <td>
+                <form action="editar" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{publicador.id}}">
+                    <button type="submit" class="btn btn-sm btn-outline-warning">Editar</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 {% endblock %}
+
